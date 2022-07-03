@@ -15,11 +15,15 @@ function my_script_styles()
 {
     wp_register_script('themeApp', get_template_directory_uri() . '/js/lib.js', array(), '1.0.0', true);
     wp_enqueue_script('themeApp');
+    wp_register_style('sliderCss', false);
+    wp_enqueue_style('sliderCss');
+    $sliderCss = file_get_contents(get_template_directory_uri() . '/js/lib.css', true);
     wp_register_style('themeCss', false);
     wp_enqueue_style('themeCss');
     $css = file_get_contents(get_template_directory_uri() . '/css/style.css', true);
     $css = str_replace('url("../fonts', 'url("' . get_template_directory_uri() .'/fonts', $css);
     wp_add_inline_style('themeCss', $css);
+    wp_add_inline_style('sliderCss', $sliderCss);
     if (!is_admin()) {
         wp_deregister_script('jquery');
         if (is_page('inquiry')) {

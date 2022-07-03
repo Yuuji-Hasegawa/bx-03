@@ -54,8 +54,11 @@
 .c-front-box {
   padding-top: setting.spaces(l);
   padding-bottom: setting.spaces(l);
-  &:not(:last-of-type) {
+  &\:borderBottom {
     border-bottom: solid 1px var(--c-separator);
+  }
+  &\:product {
+    background: linear-gradient(to bottom, setting.brandcolor(dark) 0%, setting.darkcolor(bg) 100%);
   }
 }
 .c-redume {
@@ -69,4 +72,35 @@
   background: var(--c-overlay);
   margin-bottom: setting.spaces(l);
   color: var(--c-dimmed);
+}
+.swiper {
+  & .swiper-pagination-bullet {
+    background: setting.lightcolor(dimmed);
+  }
+  & .swiper-pagination-bullet-active {
+    background: setting.lightcolor(bg);
+  }
+}
+.swiper-slide {
+  position: relative;
+  max-height: 450px;
+}
+.c-map-embed {
+  line-height: 1;
+  position: relative;
+  & > iframe {
+    filter: grayscale(100%);
+    display: block;
+  }
+}
+.c-campaign-badge {
+  background: setting.brandcolor(base);
+  color: #fff;
+  line-height: setting.lineheight(heading);
+  padding: setting.spaces(2xs) setting.spaces(xs);
+  max-width: max-content;
+  &\:end {
+    background: var(--c-overlay);
+    color: var(--c-dimmed);
+  }
 }

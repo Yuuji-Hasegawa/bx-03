@@ -1,27 +1,22 @@
 @use '../settings' as setting;
+@use '../tools' as tool;
+
 .c-logo {
   line-height: 1;
-  &\:head {
-    font-size: 38px;
-  }
-  &\:footer {
-    font-size: 70px;
-    flex-shrink: 0;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: clamp(setting.spaces(xs), calc((100vw - 768px) * 999), setting.spaces(m));
+  margin-bottom: setting.spaces(xs);
+  font-size: clamp(38px, calc((100vw - 768px) * 999), setting.fontsize(2xl));
+  @include tool.max-screen(767px) {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 .c-footer-logo {
-  display: flex;
-  margin-bottom: setting.spaces(m);
-  gap: setting.spaces(xs);
-  align-items: center;
-  justify-content: center;
-}
-.c-footer-label {
-  font-size: setting.fontsize(m);
-  font-weight: setting.fontweight(b);
-  line-height: setting.lineheight(heading);
-  font-family: setting.$font-family-roboto;
-  &__link {
-    color: inherit;
-  }
+  line-height: 1;
+  display: table;
+  margin: setting.spaces(s) auto setting.spaces(l);
+  font-size: setting.fontsize(2xl);
 }

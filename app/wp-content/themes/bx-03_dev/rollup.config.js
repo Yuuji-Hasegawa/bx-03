@@ -1,6 +1,7 @@
 import { terser } from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import css from 'rollup-plugin-import-css';
 
 export default {
   input: 'src/js/app.mjs',
@@ -9,5 +10,5 @@ export default {
     format: 'umd',
     name: 'MyModule',
   },
-  plugins: [commonjs(), nodeResolve(), terser()],
+  plugins: [commonjs(), nodeResolve(), terser(), css()],
 };

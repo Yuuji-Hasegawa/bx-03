@@ -1,18 +1,25 @@
 @use '../settings' as setting;
+@use '../tools' as tool;
+
 .o-has-icon {
   display: inline-flex;
   align-items: baseline;
   gap: setting.spaces(3xs);
   &\:center,
   &\:goList,
-  &\:time {
+  &\:time,
+  &\:menuBtn,
+  &\:closeBtn,
+  &\:comment {
     align-items: center;
   }
   &\:xs,
   &\:goList {
     gap: setting.spaces(xs);
   }
-  &\:xxs {
+  &\:xxs,
+  &\:menuBtn,
+  &\:closeBtn {
     gap: setting.spaces(2xs);
   }
   &\:s {
@@ -28,7 +35,6 @@
   &\:time {
     line-height: 1;
     font-size: setting.fontsize(xs);
-    font-family: setting.$font-family-roboto;
     color: var(--c-dimmed);
   }
   &\:redume {
@@ -47,6 +53,29 @@
     margin-bottom: setting.spaces(base);
     border-bottom: solid 1px var(--c-separator);
   }
+  &\:menuBtn,
+  &\:closeBtn {
+    line-height: 1;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px 0;
+    transition: all setting.animes(duration) setting.animes(timing);
+    @include tool.min-screen(768px) {
+      display: none;
+    }
+  }
+  &\:closeBtn {
+    color: setting.lightcolor(bg);
+    &:hover,
+    &:focus {
+      color: setting.brandcolor(light);
+    }
+  }
+  &\:comment {
+    line-height: 1;
+    color: setting.brandcolor(base);
+    font-weight: setting.fontweight(m);
+  }
 }
 .c-redume-marker {
   position: absolute;
@@ -57,4 +86,11 @@
   &\:is-open {
     transform: translateY(-50%) rotate(180deg);
   }
+}
+.c-comment-icon {
+  color: var(--c-dimmed);
+}
+.c-comment-count {
+  font-weight: setting.fontweight(b);
+  font-size: setting.fontsize(m);
 }

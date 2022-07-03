@@ -6,7 +6,9 @@
   flex-wrap: wrap;
   gap: setting.spaces(base);
   &\:center,
-  &\:ftNav {
+  &\:ftNav,
+  &\:totalReview,
+  &\:bottomSns {
     justify-content: center;
   }
   &\:s,
@@ -14,31 +16,18 @@
     gap: setting.spaces(s);
   }
   &\:xs,
-  &\:ftNav {
+  &\:ftNav,
+  &\:reviewer,
+  &\:totalReview {
     gap: setting.spaces(xs);
   }
   &\:xxs {
     gap: setting.spaces(2xs);
   }
   &\:ftNav {
-    margin-bottom: setting.spaces(base);
     @include tool.max-screen(767px) {
       justify-content: flex-start;
     }
-  }
-  &\:headLogo {
-    line-height: 1;
-    font-size: 32px;
-    align-items: center;
-    color: var(--c-txt);
-    gap: setting.spaces(xs);
-    padding: 10px 0;
-  }
-  &__headLogo {
-    line-height: setting.lineheight(heading);
-    font-family: setting.$font-family-roboto;
-    font-size: setting.fontsize(l);
-    font-weight: setting.fontweight(b);
   }
   &__ftItem {
     flex-shrink: 0;
@@ -49,7 +38,69 @@
       width: 100%;
     }
   }
+  &\:bottomSns {
+    margin-bottom: setting.spaces(l);
+  }
   &\:sns {
     margin-top: setting.spaces(xs);
   }
+  &\:spSns {
+    gap: setting.spaces(l);
+    justify-content: center;
+  }
+  &\:reviewer {
+    align-items: center;
+    margin-bottom: setting.spaces(xs);
+  }
+  &\:totalReview {
+    align-items: center;
+    max-width: setting.itemsize(content);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: setting.spaces(m);
+  }
+  &\:gallery {
+    margin: setting.spaces(xl) 0;
+    > li {
+      flex-shrink: 0;
+      width: calc((100% - setting.spaces(base) * 2) / 3);
+    }
+  }
+}
+.c-review-pict {
+  width: 32px;
+  flex-shrink: 0;
+  > .o-frame > * {
+    border-radius: 50%;
+  }
+}
+.c-review-name,
+.c-review-time {
+  font-size: setting.fontsize(xs);
+}
+.c-review-name {
+  font-weight: setting.fontweight(b);
+}
+.c-review-time {
+  font-weight: setting.fontweight(m);
+  color: var(--c-dimmed);
+}
+.c-review-body {
+  line-height: setting.lineheight(body);
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  overflow: hidden;
+  max-height: calc(setting.fontsize(s) * setting.lineheight(body) * 3);
+  text-overflow: ellipsis;
+  transition: max-height setting.animes(duration) setting.animes(timing);
+  &\:is-view {
+    max-height: none;
+    display: block;
+  }
+}
+.c-total-rating {
+  font-size: setting.fontsize(l);
+  font-weight: setting.fontweight(b);
+  line-height: setting.lineheight(heading);
+  color: setting.brandcolor(base);
 }

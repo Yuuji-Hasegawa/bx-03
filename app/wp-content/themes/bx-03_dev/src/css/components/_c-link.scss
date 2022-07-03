@@ -27,10 +27,16 @@
     }
   }
   &\:ftNav {
-    color: inherit;
+    color: setting.lightcolor(bg);
     font-weight: setting.fontweight(m);
-    padding: setting.spaces(s);
-    text-align: left;
+    font-family: setting.$font-family-mlt;
+    letter-spacing: -4px;
+    padding: clamp(setting.spaces(s), calc((100vw - 768px) * 999), setting.spaces(base))
+      clamp(setting.spaces(xs), calc((100vw - 1000px) * 999), setting.spaces(m));
+    &:hover,
+    &:focus {
+      color: setting.brandcolor(light);
+    }
   }
   &\:bottomCat {
     align-items: center;
@@ -43,5 +49,15 @@
     line-height: 1;
     font-size: 1.5rem;
     color: inherit;
+  }
+  &\:spSns,
+  &\:bottomSns {
+    line-height: 1;
+    font-size: setting.fontsize(l);
+    color: setting.lightcolor(bg);
+    &:hover,
+    &:focus {
+      color: setting.brandcolor(light);
+    }
   }
 }

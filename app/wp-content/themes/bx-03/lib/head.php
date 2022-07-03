@@ -7,7 +7,15 @@ function set_my_title()
         $my_title = '見つかりませんでした';
     } elseif (is_archive()) {
         if (is_post_type_archive('news')) {
-            $my_title = 'これまでのお知らせ';
+            $my_title = 'News';
+        } elseif (is_post_type_archive('gallery')) {
+            $my_title = 'Gallery';
+        } elseif (is_post_type_archive('product')) {
+            $my_title = 'Product';
+        } elseif (is_post_type_archive('review')) {
+            $my_title = 'Review';
+        } elseif (is_post_type_archive('campaign')) {
+            $my_title = 'Campaign';
         } elseif (is_category()) {
             $my_title = single_cat_title('', false);
         } elseif (is_tag()) {
@@ -35,46 +43,66 @@ add_filter('pre_get_document_title', 'meta_title');
 function get_page_title()
 {
     global $post;
-    $output = '<header class="c-hero"><h1 class="o-cover o-cover:heroInner">';
-    if (is_front_page()) {
-        get_vars('site', 'copy') ? $copy = get_vars('site', 'copy') : $copy = 'Hello, World!';
-        get_vars('site', 'lead') ? $lead = get_vars('site', 'lead') : $lead = get_bloginfo('description');
-        $output .= $copy . '<span class="o-cover__lead-copy">' . $lead . '</span>';
-    } elseif (is_404()) {
-        $output .= 'Not Found.<span class="o-cover__lead-copy">見つかりませんでした。</span>';
+    $output = '<header class="c-page-heading"><h1 class="o-cover o-cover:headingInner">';
+    if (is_404()) {
+        $output .= 'Not Found.';
     } elseif (is_page()) {
-        if (is_page('privacy-policy')) {
-            $output .= 'Privacy Policy<span class="o-cover__lead-copy">' . get_the_title() .'</span>';
-        } elseif (is_page('aboutus')) {
-            $output .= 'About Us<span class="o-cover__lead-copy">' . get_the_title() .'</span>';
-        } else {
-            $output .= ucfirst($post->post_name) . '<span class="o-cover__lead-copy">' . get_the_title() .'</span>';
-        }
+        $output .= get_the_title();
     } elseif (is_archive()) {
         if (is_post_type_archive('news')) {
-            $output .= 'Information<span class="o-cover__lead-copy">お知らせ</span>';
+            $output .= 'News';
+        } elseif (is_post_type_archive('gallery')) {
+            $output .= 'Gallery';
+        } elseif (is_post_type_archive('product')) {
+            $output .= 'Product';
+        } elseif (is_post_type_archive('review')) {
+            $output .= 'Review';
+        } elseif (is_post_type_archive('campaign')) {
+            $output .= 'Campaign';
         } elseif (is_category()) {
             $output .= single_cat_title('', false);
         } elseif (is_tag()) {
             $output .= '#' . single_tag_title('', false);
         } else {
-            $output .= 'Blog<span class="o-cover__lead-copy">ブログ</span>';
+            $output .= 'Blog';
+        }
+    } elseif (is_single()) {
+        if ('product' == get_post_type()) {
+            $output .= 'Product';
+        } elseif ('campaign' == get_post_type()) {
+            $output .= 'Campaign';
+        } else {
+            $output .= get_the_title();
         }
     } else {
         $output .= get_the_title();
     }
-    $output .= '</h1><picture class="o-frame">';
-    if (is_single() || is_page()) {
+    $output .= '</h1><picture class="o-frame o-frame:switch">';
+    if (is_page()) {
         if (has_post_thumbnail()) {
             $output .= '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="' . get_the_post_thumbnail_url($post->ID, 'full') . '" decoding="async" alt="" width="100%" height="100%" />';
-        } elseif (is_single()) {
+        } else {
             $output .= '<source type="image/avif"
+        data-srcset="' . get_template_directory_uri() . '/img/hero.avif" />
+    <source type="image/webp"
+        data-srcset="' . get_template_directory_uri() . '/img/hero.webp" />
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+        data-src="' . get_template_directory_uri() . '/img/hero.png"
+        decoding="async" alt="" width="100%" height="100%" />';
+        }
+    } elseif (is_single()) {
+        if ('post' == get_post_type()) {
+            if (has_post_thumbnail()) {
+                $output .= '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="' . get_the_post_thumbnail_url($post->ID, 'full') . '" decoding="async" alt="" width="100%" height="100%" />';
+            } else {
+                $output .= '<source type="image/avif"
             data-srcset="' . get_template_directory_uri() . '/img/thumb.avif" />
         <source type="image/webp"
             data-srcset="' . get_template_directory_uri() . '/img/thumb.webp" />
         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
             data-src="' . get_template_directory_uri() . '/img/thumb.png"
             decoding="async" alt="" width="100%" height="100%" />';
+            }
         } else {
             $output .= '<source type="image/avif"
         data-srcset="' . get_template_directory_uri() . '/img/hero.avif" />

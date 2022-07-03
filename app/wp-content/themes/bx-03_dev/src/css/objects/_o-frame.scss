@@ -8,6 +8,12 @@
     aspect-ratio: 1/1;
     padding-bottom: calc((1 / 1) * 100%);
   }
+  &\:switch {
+    @media screen and (orientation: portrait) {
+      aspect-ratio: 9/16;
+      padding-bottom: calc((16 / 9) * 100%);
+    }
+  }
   > * {
     overflow: hidden;
     position: absolute;
